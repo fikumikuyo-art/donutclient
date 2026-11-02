@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DonutClient | Minecraft Client</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0b0912;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 8%;
+  border-bottom: 1px solid #292039;
+}
+.logo { font-size: 25px; font-weight: bold; }
+.logo span { color: #a855f7; }
+nav a {
+  color: #ddd;
+  text-decoration: none;
+  margin-left: 20px;
+}
+.hero {
+  text-align: center;
+  padding: 110px 20px 90px;
+  background: radial-gradient(ellipse at top, #382052, #0b0912 70%);
+}
+.tag {
+  color: #c084fc;
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+h1 {
+  font-size: clamp(42px, 8vw, 76px);
+  margin: 22px 0;
+}
+h1 span { color: #a855f7; }
+.hero p {
+  color: #bcb5c9;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.btn {
+  display: inline-block;
+  margin-top: 30px;
+  background: #9333ea;
+  color: white;
+  text-decoration: none;
+  padding: 16px 32px;
+  border-radius: 9px;
+  font-weight: bold;
+}
+.btn:hover { background: #a855f7; }
+section { padding: 65px 8%; }
+h2 { font-size: 30px; margin-bottom: 25px; }
+h2 span { color: #a855f7; }
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(190px,1fr));
+  gap: 16px;
+}
+.card {
+  background: #171220;
+  border: 1px solid #332342;
+  border-radius: 12px;
+  padding: 24px;
+}
+.card h3 { color: #c084fc; margin-bottom: 10px; }
+.card p { color: #aaa2b6; line-height: 1.5; }
+.download {
+  text-align: center;
+  background: #151020;
+  border-top: 1px solid #332342;
+  border-bottom: 1px solid #332342;
+}
+.download p { color: #aaa2b6; }
+footer {
+  padding: 30px;
+  text-align: center;
+  color: #766d82;
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">DONUT<span>CLIENT</span></div>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#download">Download</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="tag">MINECRAFT FABRIC 1.21.11</div>
+  <h1>YOUR GAME.<br><span>YOUR RULES.</span></h1>
+  <p>Discover DonutClient.<br>
+  Custom Minecraft client with powerful modules.</p>
+  <a href="#download" class="btn">EXPLORE CLIENT</a>
+</div>
+
+<section id="features">
+  <h2>CLIENT <span>FEATURES</span></h2>
+  <div class="features">
+    <div class="card">
+      <h3>Storage Finder</h3>
+      <p>Moduł wyszukiwania magazynów.</p>
+    </div>
+    <div class="card">
+      <h3>Base Finder</h3>
+      <p>Moduł związany z odkrywaniem baz.</p>
+    </div>
+    <div class="card">
+      <h3>Fly</h3>
+      <p>Moduł latania.</p>
+    </div>
+    <div class="card">
+      <h3>Freecam</h3>
+      <p>Swobodna kamera.</p>
+    </div>
+    <div class="card">
+      <h3>And More</h3>
+      <p>More custom modules coming soon.</p>
+    </div>
+  </div>
+</section>
+
+<section id="download" class="download">
+  <h2>GET <span>DONUTCLIENT</span></h2>
+  <p>Fabric · Minecraft 1.21.11</p>
+  <a class="btn" href="https://github.com/" target="_blank">
+    DOWNLOAD COMING SOON
+  </a>
+  <p style="margin-top:18px;font-size:13px">
+    Download link will be available when the release is published.
+  </p>
+</section>
+
+<footer>
+  DONUTCLIENT © 2026 · Unofficial Minecraft client project
+</footer>
+</body>
+</html>
