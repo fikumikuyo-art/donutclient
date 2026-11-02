@@ -1,149 +1,322 @@
 
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DonutClient | Minecraft Client</title>
+<link rel="icon" type="image/png" href="donutclient-icon.png">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;700;800&display=swap');
+
+:root {
+  --purple: #a855f7;
+  --pink: #d946ef;
+  --bg: #08050e;
+  --panel: #130c1d;
+  --text: #f7efff;
+  --muted: #a99ab8;
+}
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-  background: #0b0912;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 15% 20%, #581c8740, transparent 45%),
+    radial-gradient(ellipse at 85% 60%, #86198b25, transparent 40%);
+}
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: #c084fc;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #c084fc;
+  animation: float 9s infinite ease-in-out;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); opacity: .2; }
+  50% { transform: translateY(-100px); opacity: .9; }
+}
+nav {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 20px 8%;
+  background: #08050ee8;
+  border-bottom: 1px solid #a855f733;
+  backdrop-filter: blur(15px);
+}
+.logo {
+  font: 900 22px Orbitron;
   color: white;
-  font-family: Arial, sans-serif;
+  text-shadow: 0 0 15px var(--purple);
 }
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px 8%;
-  border-bottom: 1px solid #292039;
-}
-.logo { font-size: 25px; font-weight: bold; }
-.logo span { color: #a855f7; }
+.logo span { color: var(--purple); }
 nav a {
-  color: #ddd;
-  text-decoration: none;
-  margin-left: 20px;
+  color: var(--muted); text-decoration: none;
+  margin-left: 25px; font-size: 14px;
+  transition: .2s;
 }
+nav a:hover { color: white; }
 .hero {
-  text-align: center;
-  padding: 110px 20px 90px;
-  background: radial-gradient(ellipse at top, #382052, #0b0912 70%);
+  min-height: 680px;
+  display: flex; align-items: center;
+  padding: 90px 10%;
+  position: relative;
 }
+.hero-content { max-width: 750px; }
 .tag {
-  color: #c084fc;
-  letter-spacing: 3px;
-  font-size: 12px;
+  color: #d8b4fe;
+  border: 1px solid #a855f766;
+  background: #a855f718;
+  display: inline-block;
+  padding: 10px 16px; border-radius: 30px;
+  font-size: 12px; letter-spacing: 2px;
 }
 h1 {
-  font-size: clamp(42px, 8vw, 76px);
-  margin: 22px 0;
+  font: 900 clamp(45px, 8vw, 90px) Orbitron;
+  line-height: 1.1; margin: 25px 0;
 }
-h1 span { color: #a855f7; }
+h1 span {
+  color: var(--purple);
+  text-shadow: 0 0 35px #9333ea99;
+}
 .hero p {
-  color: #bcb5c9;
-  font-size: 17px;
-  line-height: 1.7;
+  color: var(--muted); line-height: 1.8;
+  max-width: 540px; font-size: 17px;
 }
+.buttons { display: flex; gap: 15px; margin-top: 35px; flex-wrap: wrap; }
 .btn {
-  display: inline-block;
-  margin-top: 30px;
-  background: #9333ea;
-  color: white;
-  text-decoration: none;
-  padding: 16px 32px;
-  border-radius: 9px;
-  font-weight: bold;
+  display: inline-block; padding: 16px 25px;
+  border-radius: 10px; text-decoration: none;
+  font-weight: 800; transition: .25s;
 }
-.btn:hover { background: #a855f7; }
-section { padding: 65px 8%; }
-h2 { font-size: 30px; margin-bottom: 25px; }
-h2 span { color: #a855f7; }
-.features {
+.primary {
+  color: white;
+  background: linear-gradient(120deg,#9333ea,#c026d3);
+  box-shadow: 0 0 25px #9333ea55;
+}
+.secondary {
+  color: white; border: 1px solid #a855f766;
+  background: #ffffff08;
+}
+.btn:hover { transform: translateY(-5px); box-shadow: 0 0 35px #a855f788; }
+.hero-art {
+  position: absolute; right: 9%; top: 22%;
+  width: 270px; height: 270px;
+  border-radius: 50%;
+  background: radial-gradient(circle,#a855f766,#581c8733 50%,transparent 70%);
+  display: grid; place-items: center;
+  font-size: 125px;
+  filter: drop-shadow(0 0 30px #a855f7);
+  animation: pulse 4s infinite ease-in-out;
+}
+@keyframes pulse {
+  50% { transform: translateY(-18px) scale(1.05); }
+}
+section { padding: 85px 9%; }
+.section-title {
+  font: 800 35px Orbitron;
+  text-align: center; margin-bottom: 15px;
+}
+.subtitle {
+  color: var(--muted); text-align: center;
+  margin-bottom: 45px;
+}
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(190px,1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 20px;
 }
 .card {
-  background: #171220;
-  border: 1px solid #332342;
-  border-radius: 12px;
-  padding: 24px;
+  background: linear-gradient(145deg,#1b1028,#0e0916);
+  border: 1px solid #a855f733;
+  padding: 28px; border-radius: 17px;
+  transition: .3s; position: relative;
+  overflow: hidden;
 }
-.card h3 { color: #c084fc; margin-bottom: 10px; }
-.card p { color: #aaa2b6; line-height: 1.5; }
+.card::before {
+  content: ""; position: absolute;
+  width: 150px; height: 150px;
+  background: #a855f722; filter: blur(45px);
+  right: -60px; top: -60px;
+}
+.card:hover {
+  transform: translateY(-8px);
+  border-color: var(--purple);
+  box-shadow: 0 10px 40px #9333ea22;
+}
+.card .emoji { font-size: 35px; margin-bottom: 18px; }
+.card h3 { font-size: 19px; margin-bottom: 10px; }
+.card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+.preview {
+  max-width: 850px; margin: auto;
+  padding: 25px; border-radius: 18px;
+  background: #100a19;
+  border: 1px solid #a855f766;
+  box-shadow: 0 0 60px #9333ea22;
+}
+.window-bar {
+  display: flex; gap: 7px;
+  padding-bottom: 20px; border-bottom: 1px solid #ffffff18;
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; background: #a855f7; }
+.gui {
+  display: grid; grid-template-columns: 130px 1fr;
+  gap: 20px; padding-top: 20px;
+}
+.sidebar div {
+  padding: 12px; margin-bottom: 8px;
+  background: #a855f715; border-radius: 7px;
+  font-size: 12px; color: #d8b4fe;
+}
+.gui-main h3 { font: 700 18px Orbitron; margin-bottom: 20px; }
+.module {
+  display: flex; justify-content: space-between;
+  padding: 14px; margin-bottom: 9px;
+  border: 1px solid #a855f733;
+  border-radius: 8px; font-size: 13px;
+}
+.on { color: #c084fc; }
+.gallery-box {
+  min-height: 190px; display: grid;
+  place-items: center; text-align: center;
+  background: linear-gradient(135deg,#27113e,#100a19);
+  border: 1px solid #a855f744;
+  border-radius: 15px; font: 700 18px Orbitron;
+  color: #d8b4fe;
+}
 .download {
   text-align: center;
-  background: #151020;
-  border-top: 1px solid #332342;
-  border-bottom: 1px solid #332342;
+  background: radial-gradient(ellipse,#581c8733,transparent 70%);
 }
-.download p { color: #aaa2b6; }
+.download h2 { font: 900 42px Orbitron; margin-bottom: 20px; }
+.download p { color: var(--muted); margin-bottom: 30px; }
 footer {
-  padding: 30px;
-  text-align: center;
-  color: #766d82;
-  font-size: 13px;
+  padding: 30px; text-align: center;
+  border-top: 1px solid #a855f733;
+  color: var(--muted); font-size: 13px;
+}
+@media(max-width:750px) {
+  nav { padding: 18px 5%; }
+  nav a { margin-left: 10px; font-size: 11px; }
+  .hero { padding: 75px 7%; min-height: 600px; }
+  .hero-art { opacity: .18; right: -60px; top: 20%; }
+  section { padding: 65px 6%; }
+  .gui { grid-template-columns: 1fr; }
+  .sidebar { display: flex; gap: 6px; flex-wrap: wrap; }
+  .sidebar div { margin: 0; }
 }
 </style>
 </head>
 <body>
-<header>
+<div id="particles"></div>
+
+<nav>
   <div class="logo">DONUT<span>CLIENT</span></div>
-  <nav>
+  <div>
     <a href="#features">Features</a>
+    <a href="#preview">GUI</a>
+    <a href="#gallery">Gallery</a>
     <a href="#download">Download</a>
-  </nav>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-content">
+    <div class="tag">✦ FABRIC · MINECRAFT 1.21.11</div>
+    <h1>YOUR GAME.<br><span>YOUR RULES.</span></h1>
+    <p>A custom Minecraft client with a unique interface, useful modules and a purple neon design. Welcome to DonutClient.</p>
+    <div class="buttons">
+      <a href="#download" class="btn primary">Explore Client ↗</a>
+      <a href="#features" class="btn secondary">Discover Features</a>
+    </div>
+  </div>
+  <div class="hero-art">🍩</div>
 </header>
 
-<div class="hero">
-  <div class="tag">MINECRAFT FABRIC 1.21.11</div>
-  <h1>YOUR GAME.<br><span>YOUR RULES.</span></h1>
-  <p>Discover DonutClient.<br>
-  Custom Minecraft client with powerful modules.</p>
-  <a href="#download" class="btn">EXPLORE CLIENT</a>
-</div>
-
 <section id="features">
-  <h2>CLIENT <span>FEATURES</span></h2>
-  <div class="features">
-    <div class="card">
-      <h3>Storage Finder</h3>
-      <p>Moduł wyszukiwania magazynów.</p>
-    </div>
-    <div class="card">
-      <h3>Base Finder</h3>
-      <p>Moduł związany z odkrywaniem baz.</p>
-    </div>
-    <div class="card">
-      <h3>Fly</h3>
-      <p>Moduł latania.</p>
-    </div>
-    <div class="card">
-      <h3>Freecam</h3>
-      <p>Swobodna kamera.</p>
-    </div>
-    <div class="card">
-      <h3>And More</h3>
-      <p>More custom modules coming soon.</p>
+  <h2 class="section-title">FEATURES</h2>
+  <p class="subtitle">Explore the DonutClient modules.</p>
+  <div class="grid">
+    <div class="card"><div class="emoji">📦</div><h3>Storage Finder</h3><p>Tools for locating storage-related information.</p></div>
+    <div class="card"><div class="emoji">🏠</div><h3>Base Finder</h3><p>World exploration and base discovery tools.</p></div>
+    <div class="card"><div class="emoji">🪽</div><h3>Fly</h3><p>Movement module for supported environments.</p></div>
+    <div class="card"><div class="emoji">👁️</div><h3>Freecam</h3><p>Explore your surroundings with a free camera.</p></div>
+    <div class="card"><div class="emoji">✨</div><h3>Fullbright</h3><p>Adjust visibility in dark areas.</p></div>
+    <div class="card"><div class="emoji">⚙️</div><h3>More Modules</h3><p>More features and improvements coming soon.</p></div>
+  </div>
+</section>
+
+<section id="preview">
+  <h2 class="section-title">CLIENT INTERFACE</h2>
+  <p class="subtitle">A preview of the DonutClient GUI.</p>
+  <div class="preview">
+    <div class="window-bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    <div class="gui">
+      <div class="sidebar">
+        <div>✦ DONUT</div><div>Modules</div><div>Visuals</div><div>Settings</div>
+      </div>
+      <div class="gui-main">
+        <h3>MODULE MANAGER</h3>
+        <div class="module">Storage Finder <span class="on">● ON</span></div>
+        <div class="module">Base Finder <span class="on">● ON</span></div>
+        <div class="module">Freecam <span>○ OFF</span></div>
+        <div class="module">Fullbright <span class="on">● ON</span></div>
+      </div>
     </div>
   </div>
 </section>
 
+<section id="gallery">
+  <h2 class="section-title">GALLERY</h2>
+  <p class="subtitle">DonutClient visuals and previews.</p>
+  <div class="grid">
+    <div class="gallery-box">🍩<br>DONUTCLIENT</div>
+    <div class="gallery-box">✦<br>PURPLE GUI</div>
+    <div class="gallery-box">⚙️<br>MODULES</div>
+  </div>
+</section>
+
 <section id="download" class="download">
-  <h2>GET <span>DONUTCLIENT</span></h2>
-  <p>Fabric · Minecraft 1.21.11</p>
-  <a class="btn" href="https://github.com/" target="_blank">
-    DOWNLOAD COMING SOON
-  </a>
-  <p style="margin-top:18px;font-size:13px">
-    Download link will be available when the release is published.
-  </p>
+  <h2>READY TO EXPLORE?</h2>
+  <p>DonutClient · Fabric · Minecraft 1.21.11</p>
+  <a class="btn primary" href="https://github.com/fikumikuyo-art/donutclient">VIEW PROJECT ON GITHUB ↗</a>
+  <p style="margin-top:20px;font-size:12px;">A direct client download will be added when a release is available.</p>
 </section>
 
 <footer>
-  DONUTCLIENT © 2026 · Unofficial Minecraft client project
+  © 2026 DonutClient · Made for Minecraft
 </footer>
+
+<script>
+const particles = document.getElementById("particles");
+for (let i = 0; i < 45; i++) {
+  const p = document.createElement("div");
+  p.className = "particle";
+  p.style.left = Math.random() * 100 + "%";
+  p.style.top = Math.random() * 100 + "%";
+  p.style.animationDelay = Math.random() * 8 + "s";
+  p.style.animationDuration = (6 + Math.random() * 8) + "s";
+  particles.appendChild(p);
+}
+</script>
 </body>
 </html>
+
